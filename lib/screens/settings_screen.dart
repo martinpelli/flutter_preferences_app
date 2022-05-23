@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_preferences_app/widgets/custom_drawer.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -8,9 +9,10 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Settings page')),
+      appBar: AppBar(title: Text('Settings')),
+      drawer: const CustomDrawer(),
       body: Center(
-        child: Text('Hola Mundo'),
+        child: Text('Settings Screen'),
       ),
     );
   }
