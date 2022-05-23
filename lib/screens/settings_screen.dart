@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_preferences_app/widgets/custom_drawer.dart';
 
-class SettingsScreen extends StatelessWidget {
+import '../shared_preferences/preferences.dart';
+
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
 
   static const String routerName = 'settings';
 
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,26 +28,41 @@ class SettingsScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 45, fontWeight: FontWeight.w300)),
               const Divider(),
               SwitchListTile.adaptive(
-                  value: true,
+                  value: Preferences.isDarkMode,
                   title: const Text('DarkMode'),
-                  onChanged: (value) {}),
+                  onChanged: (value) {
+                    setState(() {
+                      Preferences.isDarkMode = value;
+                    });
+                  }),
               const Divider(),
-              RadioListTile(
+              RadioListTile<int>(
                   title: const Text('Masculin'),
                   value: 1,
-                  groupValue: 1,
-                  onChanged: (value) {}),
+                  groupValue: Preferences.gender,
+                  onChanged: (value) {
+                    setState(() {
+                      Preferences.gender = value ?? 1;
+                    });
+                  }),
               const Divider(),
-              RadioListTile(
+              RadioListTile<int>(
                   title: const Text('Femenine'),
                   value: 0,
-                  groupValue: 1,
-                  onChanged: (value) {}),
+                  groupValue: Preferences.gender,
+                  onChanged: (value) {
+                    setState(() {
+                      Preferences.gender = value ?? 2;
+                    });
+                  }),
               const Divider(),
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextFormField(
-                    initialValue: 'Pelli',
+                    initialValue: Preferences.name,
+                    onChanged: (value) {
+                      Preferences.name = value;
+                    },
                     decoration: const InputDecoration(
                         labelText: 'Name', helperText: 'Username'),
                   ))
