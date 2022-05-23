@@ -1,4 +1,4 @@
-#Mon May 23 17:07:54 ART 2022
+#Mon May 23 17:34:34 ART 2022
 base.0=/home/pelli/Documents/Repos/flutter_preferences_app/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

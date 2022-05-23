@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_preferences_app/widgets/custom_drawer.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/them_provider.dart';
 import '../shared_preferences/preferences.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -31,9 +33,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   value: Preferences.isDarkMode,
                   title: const Text('DarkMode'),
                   onChanged: (value) {
-                    setState(() {
-                      Preferences.isDarkMode = value;
-                    });
+                    Preferences.isDarkMode = value;
+                    final themeProvider =
+                        Provider.of<ThemeProvider>(context, listen: false);
+                    value
+                        ? themeProvider.setDarkMode()
+                        : themeProvider.setLightMode();
+                    setState(() {});
                   }),
               const Divider(),
               RadioListTile<int>(
